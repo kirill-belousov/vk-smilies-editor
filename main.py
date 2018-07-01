@@ -12,19 +12,22 @@ def savefile():
 	f.close()
 	print("файл сохранён")
 
+def openfile():
+	n = input ("введите имя файла, который нужно открыть")
+	f = open(n, "r", encoding="utf_8_sig")
+	for line in f:
+		s = line.split("\t")
+		if len(s) <= 1: continue
+		d[s[0]] = s[1]
+	f.close()
 
 
-f = open("smilies.dic", "r", encoding="utf_8_sig")
 d = dict()
-for line in f:
-	s = line.split("\t")
-	if len(s) <= 1: continue
-	d[s[0]] = s[1]
-f.close()
+openfile()
 
 while True:
 	cmd = input("введите команду или символ: ")
-	if cmd[0] == "/": command(cmd[1:])
+	if cmd[0] == "/": command(cmd[1:]);continue
 	if d.get(cmd):
 		print(d[cmd])
 		s = input("изменить описание символа? введите новое описание или /, чтобы оставить старое")
